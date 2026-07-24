@@ -1,0 +1,1 @@
+﻿export function SiteHeader(){return <div className="sticky-nav"><nav className="nav shell"><a className="brand" href="/"><b>P</b>Paperly</a><div className="nav-links"><a href="/#tools">Tools</a><a href="/blog">Blog</a><a href="/about">About</a><a href="/admin" className="admin-link">Admin</a></div></nav></div>}

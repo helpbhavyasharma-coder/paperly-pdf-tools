@@ -1,6 +1,8 @@
-﻿"use client";
+"use client";
 
 import { ChangeEvent, DragEvent, useRef, useState } from "react";
+import { SiteHeader } from "../components/SiteHeader";
+import { SiteFooter } from "../components/SiteFooter";
 
 type Item={id:string;file:File;url:string;rotation:number};
 type Size="a4"|"letter"|"auto";
@@ -32,7 +34,7 @@ export default function Home(){
   async function add(files:FileList|File[]){
     const valid=Array.from(files).filter(f=>f.type.startsWith("image/")||heic(f));
     if(!valid.length){setError("Please choose an image file such as JPG, PNG, WebP, GIF or HEIC.");return}
-    setError("");setMessage(valid.some(heic)?"Preparing HEIC image…":"");
+    setError("");setMessage(valid.some(heic)?"Preparing HEIC imageâ€¦":"");
     try{const next=await Promise.all(valid.map(async file=>({id:crypto.randomUUID(),file,url:await source(file),rotation:0})));setItems(v=>[...v,...next]);setMessage("")}
     catch{setError("One image could not be opened. Try saving it as JPG or PNG.");setMessage("")}
   }
@@ -48,7 +50,7 @@ export default function Home(){
     try{
       const {jsPDF}=await import("jspdf");let pdf:InstanceType<typeof jsPDF>|null=null;
       for(let p=0;p<items.length;p++){
-        setMessage(`Building page ${p+1} of ${items.length}…`);const item=items[p],img=await decode(item.url),side=item.rotation%180!==0;
+        setMessage(`Building page ${p+1} of ${items.length}â€¦`);const item=items[p],img=await decode(item.url),side=item.rotation%180!==0;
         const sw=side?img.naturalHeight:img.naturalWidth,sh=side?img.naturalWidth:img.naturalHeight;
         let page:[number,number]=size==="auto"?[Math.max(25,sw*.15),Math.max(25,sh*.15)]:[...sizes[size]];
         const landscape=orientation==="landscape"||(orientation==="auto"&&sw>=sh);if((landscape&&page[0]<page[1])||(!landscape&&page[0]>page[1]))page=[page[1],page[0]];
@@ -59,21 +61,21 @@ export default function Home(){
         if(!pdf)pdf=new jsPDF({unit:"mm",format:page,orientation:dir,compress:true});else pdf.addPage(page,dir);pdf.addImage(data,"JPEG",(page[0]-w)/2,(page[1]-h)/2,w,h,undefined,"FAST");
       }
       if(!pdf)throw Error();pdf.save(`paperly-${new Date().toISOString().slice(0,10)}.pdf`);setMessage("Your PDF has been downloaded.");setTimeout(()=>setMessage(""),3500)
-    }catch{setError("We couldn’t create this PDF. Remove the last image and try again.");setMessage("")}finally{setBusy(false)}
+    }catch{setError("We couldnâ€™t create this PDF. Remove the last image and try again.");setMessage("")}finally{setBusy(false)}
   }
 
   return <main>
-    <nav className="nav shell"><a className="brand" href="/"><b>P</b>Paperly</a><a className="back-home" href="/">← All tools</a></nav>
-    <header className="hero shell"><p className="kicker">— Your images, one tidy PDF</p><h1>Turn any image into a<br/><em>beautiful PDF.</em></h1><p>Drop your photos, arrange the pages, and download. Everything happens in your browser—your images never leave your device.</p></header>
+    <SiteHeader/>
+    <header className="hero shell"><p className="kicker">â€” Your images, one tidy PDF</p><h1>Turn any image into a<br/><em>beautiful PDF.</em></h1><p>Drop your photos, arrange the pages, and download. Everything happens in your browserâ€”your images never leave your device.</p></header>
     <section className="workspace shell">
       <div className={`drop ${over?"over":""}`} onDragEnter={e=>{e.preventDefault();setOver(true)}} onDragOver={e=>e.preventDefault()} onDragLeave={()=>setOver(false)} onDrop={e=>drop(e)}>
-        <input ref={input} type="file" accept="image/*,.heic,.heif" multiple onChange={choose}/><div className="fileicon">↑</div><h2>{items.length?"Add more images":"Drop your images here"}</h2><p>JPG, PNG, WebP, HEIC, GIF and more</p><button className="primary" onClick={()=>input.current?.click()}>Choose images</button><small>No sign-up. No watermarks. Completely free.</small>
+        <input ref={input} type="file" accept="image/*,.heic,.heif" multiple onChange={choose}/><div className="fileicon">â†‘</div><h2>{items.length?"Add more images":"Drop your images here"}</h2><p>JPG, PNG, WebP, HEIC, GIF and more</p><button className="primary" onClick={()=>input.current?.click()}>Choose images</button><small>No sign-up. No watermarks. Completely free.</small>
       </div>
       {error&&<div className="alert error">{error}</div>}{message&&<div className="alert">{message}</div>}
       {!!items.length&&<div className="editor">
         <div className="title"><div><i>01</i><h2>Arrange your pages</h2></div><button className="clear" onClick={clear}>Clear all</button></div>
         <div className="grid">{items.map((item,index)=><article key={item.id} draggable onDragStart={()=>setDrag(item.id)} onDragOver={e=>e.preventDefault()} onDrop={e=>drop(e,item.id)}>
-          <div className="preview"><label>{index+1}</label><img src={item.url} alt={item.file.name} style={{transform:`rotate(${item.rotation}deg)`}}/><div className="actions"><button disabled={!index} onClick={()=>move(index,-1)}>←</button><button onClick={()=>rotate(item.id)}>↻</button><button disabled={index===items.length-1} onClick={()=>move(index,1)}>→</button><button onClick={()=>remove(item.id)}>×</button></div></div><strong title={item.file.name}>{item.file.name}</strong><small>{bytes(item.file.size)}</small>
+          <div className="preview"><label>{index+1}</label><img src={item.url} alt={item.file.name} style={{transform:`rotate(${item.rotation}deg)`}}/><div className="actions"><button disabled={!index} onClick={()=>move(index,-1)}>â†</button><button onClick={()=>rotate(item.id)}>â†»</button><button disabled={index===items.length-1} onClick={()=>move(index,1)}>â†’</button><button onClick={()=>remove(item.id)}>Ã—</button></div></div><strong title={item.file.name}>{item.file.name}</strong><small>{bytes(item.file.size)}</small>
         </article>)}<button className="add" onClick={()=>input.current?.click()}><b>+</b>Add images</button></div>
         <div className="settings"><div className="title"><div><i>02</i><h2>Set the look</h2></div></div><div className="controls">
           <label><span>Page size</span><select value={size} onChange={e=>setSize(e.target.value as Size)}><option value="a4">A4</option><option value="letter">US Letter</option><option value="auto">Fit to image</option></select></label>
@@ -81,12 +83,12 @@ export default function Home(){
           <label><span>Margin</span><select value={margin} onChange={e=>setMargin(Number(e.target.value))}><option value="0">None</option><option value="6">Small</option><option value="12">Comfortable</option></select></label>
           <label><span>Quality <b>{quality}%</b></span><input type="range" min="55" max="100" value={quality} onChange={e=>setQuality(Number(e.target.value))}/></label>
         </div></div>
-        <div className="convert"><div><strong>{items.length} {items.length===1?"page":"pages"}</strong><small>{bytes(items.reduce((n,i)=>n+i.file.size,0))} selected</small></div><button className="primary" disabled={busy} onClick={makePdf}>{busy?"Creating your PDF…":"Create & download PDF →"}</button></div>
+        <div className="convert"><div><strong>{items.length} {items.length===1?"page":"pages"}</strong><small>{bytes(items.reduce((n,i)=>n+i.file.size,0))} selected</small></div><button className="primary" disabled={busy} onClick={makePdf}>{busy?"Creating your PDFâ€¦":"Create & download PDF â†’"}</button></div>
       </div>}
     </section>
     <section className="trust shell"><article><i>01</i><h3>Private by design</h3><p>Your files are processed locally and never uploaded to our servers.</p></article><article><i>02</i><h3>Any image, any order</h3><p>Mix formats, rotate pages, and put everything in the perfect order.</p></article><article><i>03</i><h3>Free without friction</h3><p>No account, no watermark, and no surprise paywall at the final step.</p></article></section>
-    <section className="how shell"><small>SIMPLE ON PURPOSE</small><h2>From camera roll to PDF<br/>in three small steps.</h2><div><span>Choose your images</span><b>→</b><span>Arrange & style</span><b>→</b><span>Download your PDF</span></div></section>
-    <footer className="shell"><a className="brand" href="#"><b>P</b>Paperly</a><p>Images in. PDF out. Nothing stored.</p><span>© {new Date().getFullYear()} Paperly</span></footer>
+    <section className="how shell"><small>SIMPLE ON PURPOSE</small><h2>From camera roll to PDF<br/>in three small steps.</h2><div><span>Choose your images</span><b>â†’</b><span>Arrange & style</span><b>â†’</b><span>Download your PDF</span></div></section>
+    <SiteFooter/>
   </main>
 }
 

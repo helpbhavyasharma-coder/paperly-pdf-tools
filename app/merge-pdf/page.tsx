@@ -199,7 +199,7 @@ export default function MergePdf() {
   }
 
   function forgotPassword() {
-    setPasswordError("PDF Unlocker is coming soon. An encrypted PDF still requires its correct password.");
+    window.location.href = "/pdf-unlocker";
   }
 
   async function mergeFiles() {

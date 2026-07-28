@@ -20,6 +20,14 @@ const tools = [
     available: true,
   },
   {
+    name: "PDF Unlocker",
+    description: "Remove a known password and download clean unlocked PDF copies.",
+    href: "/pdf-unlocker",
+    formats: "SINGLE OR MULTIPLE PDF FILES",
+    icon: "OPEN",
+    available: true,
+  },
+  {
     name: "Compress PDF",
     description: "Make PDF files smaller while keeping them clear.",
     icon: "ZIP",
@@ -54,7 +62,7 @@ export default function Home() {
             <span>01</span>
             <h2 id="tools-title">Choose a tool</h2>
           </div>
-          <p>2 tools available</p>
+          <p>3 tools available</p>
         </div>
         <div className="tool-cards">
           {tools.map((tool) =>

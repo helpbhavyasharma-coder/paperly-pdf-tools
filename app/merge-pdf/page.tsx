@@ -169,7 +169,15 @@ export default function MergePdf() {
       </header>
 
       <section className="workspace shell merge-workspace">
-        <div
+        <input
+          className="hidden-file-input"
+          ref={inputRef}
+          type="file"
+          accept="application/pdf,.pdf"
+          multiple
+          onChange={chooseFiles}
+        />
+        {files.length === 0 && <div
           className={`drop merge-drop ${isDraggingOver ? "over" : ""}`}
           onDragEnter={(event) => {
             event.preventDefault();
@@ -179,19 +187,12 @@ export default function MergePdf() {
           onDragLeave={() => setIsDraggingOver(false)}
           onDrop={(event) => drop(event)}
         >
-          <input
-            ref={inputRef}
-            type="file"
-            accept="application/pdf,.pdf"
-            multiple
-            onChange={chooseFiles}
-          />
           <div className="merge-icon" aria-hidden="true">
             <span>PDF</span>
             <b>+</b>
             <span>PDF</span>
           </div>
-          <h2>{files.length ? "Add more PDFs" : "Drop your PDFs here"}</h2>
+          <h2>Drop your PDFs here</h2>
           <p>Select two or more PDF files</p>
           <button
             className="primary"
@@ -201,7 +202,7 @@ export default function MergePdf() {
             {isReading ? "Reading PDFs..." : "Choose PDF files"}
           </button>
           <small>No upload. No watermark. Completely free.</small>
-        </div>
+        </div>}
 
         {error && (
           <div className="alert error" role="alert">

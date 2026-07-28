@@ -68,9 +68,10 @@ export default function Home(){
     <SiteHeader/>
     <header className="hero shell"><p className="kicker">- YOUR IMAGES, ONE TIDY PDF</p><h1>Turn any image into a<br/><em>beautiful PDF.</em></h1><p>Drop your photos, arrange the pages, and download. Everything happens in your browser - your images never leave your device.</p></header>
     <section className="workspace shell">
-      <div className={`drop ${over?"over":""}`} onDragEnter={e=>{e.preventDefault();setOver(true)}} onDragOver={e=>e.preventDefault()} onDragLeave={()=>setOver(false)} onDrop={e=>drop(e)}>
-        <input ref={input} type="file" accept="image/*,.heic,.heif" multiple onChange={choose}/><div className="fileicon" aria-hidden="true"><span className="upload-arrow"></span></div><h2>{items.length?"Add more images":"Drop your images here"}</h2><p>JPG, PNG, WebP, HEIC, GIF and more</p><button className="primary" onClick={()=>input.current?.click()}>Choose images</button><small>No sign-up. No watermarks. Completely free.</small>
-      </div>
+      <input className="hidden-file-input" ref={input} type="file" accept="image/*,.heic,.heif" multiple onChange={choose}/>
+      {!items.length&&<div className={`drop ${over?"over":""}`} onDragEnter={e=>{e.preventDefault();setOver(true)}} onDragOver={e=>e.preventDefault()} onDragLeave={()=>setOver(false)} onDrop={e=>drop(e)}>
+        <div className="fileicon" aria-hidden="true"><span className="upload-arrow"></span></div><h2>Drop your images here</h2><p>JPG, PNG, WebP, HEIC, GIF and more</p><button className="primary" onClick={()=>input.current?.click()}>Choose images</button><small>No sign-up. No watermarks. Completely free.</small>
+      </div>}
       {error&&<div className="alert error">{error}</div>}{message&&<div className="alert">{message}</div>}
       {!!items.length&&<div className="editor">
         <div className="title"><div><i>01</i><h2>Arrange your pages</h2></div><button className="clear" onClick={clear}>Clear all</button></div>

@@ -30,14 +30,18 @@ const tools = [
   {
     name: "Compress PDF",
     description: "Make PDF files smaller while keeping them clear.",
+    href: "/compress-pdf",
+    formats: "SINGLE OR MULTIPLE PDF FILES",
     icon: "ZIP",
-    available: false,
+    available: true,
   },
   {
     name: "Split PDF",
     description: "Extract pages or divide a PDF into separate files.",
+    href: "/split-pdf",
+    formats: "EXTRACT · RANGES · EVERY PAGE",
     icon: "CUT",
-    available: false,
+    available: true,
   },
 ];
 
@@ -62,7 +66,7 @@ export default function Home() {
             <span>01</span>
             <h2 id="tools-title">Choose a tool</h2>
           </div>
-          <p>3 tools available</p>
+          <p>5 tools available</p>
         </div>
         <div className="tool-cards">
           {tools.map((tool) =>

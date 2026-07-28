@@ -17,8 +17,8 @@ export function SiteFooter() {
           <a href="/image-to-pdf">Image to PDF</a>
           <a href="/merge-pdf">Merge PDF</a>
           <a href="/pdf-unlocker">PDF Unlocker</a>
-          <span>Compress PDF - Soon</span>
-          <span>Split PDF - Soon</span>
+          <a href="/compress-pdf">Compress PDF</a>
+          <a href="/split-pdf">Split PDF</a>
         </div>
         <div>
           <h3>Resources</h3>

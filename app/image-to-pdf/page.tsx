@@ -120,10 +120,6 @@ export default function Home(){
               <label><span>Confirm password</span><input type={showPassword?"text":"password"} value={confirmPassword} maxLength={32} autoComplete="new-password" placeholder="Enter it again" onChange={e=>setConfirmPassword(e.target.value)}/></label>
               <label className="show-password"><input type="checkbox" checked={showPassword} onChange={e=>setShowPassword(e.target.checked)}/>Show password</label>
             </div>}
-            <div className="timed-lock-note">
-              <b>About timed unlock</b>
-              <p>A downloaded PDF cannot reliably unlock itself at a future time. That feature needs a separately hosted, time-gated download link, which we can build later.</p>
-            </div>
           </div>
         </div>
         <div className="convert"><div><strong>{items.length} {items.length===1?"page":"pages"}</strong><small>{bytes(items.reduce((n,i)=>n+i.file.size,0))} selected</small></div><button className="primary" disabled={busy} onClick={makePdf}>{busy?"Creating your PDF...":protectPdf?"Create & download locked PDF":"Create & download PDF"}</button></div>

@@ -24,6 +24,10 @@ export default function Home(){
   const [orientation,setOrientation]=useState("auto");
   const [margin,setMargin]=useState(6);
   const [quality,setQuality]=useState(88);
+  const [protectPdf,setProtectPdf]=useState(false);
+  const [password,setPassword]=useState("");
+  const [confirmPassword,setConfirmPassword]=useState("");
+  const [showPassword,setShowPassword]=useState(false);
   const [drag,setDrag]=useState<string|null>(null);
   const [over,setOver]=useState(false);
   const [busy,setBusy]=useState(false);
@@ -46,7 +50,10 @@ export default function Home(){
   function drop(e:DragEvent<HTMLElement>,target?:string){e.preventDefault();setOver(false);if(drag&&target&&drag!==target){setItems(v=>{const a=v.findIndex(i=>i.id===drag),b=v.findIndex(i=>i.id===target),n=[...v];const [x]=n.splice(a,1);n.splice(b,0,x);return n});setDrag(null)}else if(e.dataTransfer.files.length)void add(e.dataTransfer.files)}
 
   async function makePdf(){
-    if(!items.length||busy)return;setBusy(true);setError("");
+    if(!items.length||busy)return;
+    if(protectPdf&&!/^[\x20-\x7E]{4,32}$/.test(password)){setError("Use a password with 4 to 32 English letters, numbers or symbols.");return}
+    if(protectPdf&&password!==confirmPassword){setError("The two passwords do not match.");return}
+    setBusy(true);setError("");
     try{
       const {jsPDF}=await import("jspdf");let pdf:InstanceType<typeof jsPDF>|null=null;
       for(let p=0;p<items.length;p++){
@@ -58,9 +65,19 @@ export default function Home(){
         const ctx=canvas.getContext("2d");if(!ctx)throw Error();ctx.fillStyle="#fff";ctx.fillRect(0,0,canvas.width,canvas.height);ctx.save();ctx.translate(canvas.width/2,canvas.height/2);ctx.rotate(item.rotation*Math.PI/180);
         const dw=side?canvas.height:canvas.width,dh=side?canvas.width:canvas.height;ctx.drawImage(img,-dw/2,-dh/2,dw,dh);ctx.restore();
         const fit=Math.min((page[0]-margin*2)/sw,(page[1]-margin*2)/sh),w=sw*fit,h=sh*fit,data=canvas.toDataURL("image/jpeg",quality/100),dir=page[0]>page[1]?"landscape":"portrait";
-        if(!pdf)pdf=new jsPDF({unit:"mm",format:page,orientation:dir,compress:true});else pdf.addPage(page,dir);pdf.addImage(data,"JPEG",(page[0]-w)/2,(page[1]-h)/2,w,h,undefined,"FAST");
+        if(!pdf)pdf=new jsPDF({
+          unit:"mm",
+          format:page,
+          orientation:dir,
+          compress:true,
+          ...(protectPdf?{encryption:{
+            userPassword:password,
+            ownerPassword:crypto.randomUUID(),
+            userPermissions:["print" as const]
+          }}:{})
+        });else pdf.addPage(page,dir);pdf.addImage(data,"JPEG",(page[0]-w)/2,(page[1]-h)/2,w,h,undefined,"FAST");
       }
-      if(!pdf)throw Error();pdf.save(`paperly-${new Date().toISOString().slice(0,10)}.pdf`);setMessage("Your PDF has been downloaded.");setTimeout(()=>setMessage(""),3500)
+      if(!pdf)throw Error();pdf.save(`paperly-${new Date().toISOString().slice(0,10)}.pdf`);setMessage(protectPdf?"Your password-protected PDF has been downloaded.":"Your PDF has been downloaded.");setTimeout(()=>setMessage(""),3500)
     }catch{setError("We could not create this PDF. Remove the last image and try again.");setMessage("")}finally{setBusy(false)}
   }
 
@@ -84,7 +101,32 @@ export default function Home(){
           <label><span>Margin</span><select value={margin} onChange={e=>setMargin(Number(e.target.value))}><option value="0">None</option><option value="6">Small</option><option value="12">Comfortable</option></select></label>
           <label><span>Quality <b>{quality}%</b></span><input type="range" min="55" max="100" value={quality} onChange={e=>setQuality(Number(e.target.value))}/></label>
         </div></div>
-        <div className="convert"><div><strong>{items.length} {items.length===1?"page":"pages"}</strong><small>{bytes(items.reduce((n,i)=>n+i.file.size,0))} selected</small></div><button className="primary" disabled={busy} onClick={makePdf}>{busy?"Creating your PDF...":"Create & download PDF"}</button></div>
+        <div className="security-settings">
+          <div className="title"><div><i>03</i><h2>Make PDF secure</h2></div></div>
+          <div className={`security-card ${protectPdf?"enabled":""}`}>
+            <div className="security-intro">
+              <div>
+                <strong>Password protect this PDF</strong>
+                <p>The downloaded PDF will ask for this password before it opens.</p>
+              </div>
+              <label className="security-switch">
+                <input aria-label="Password protect this PDF" type="checkbox" checked={protectPdf} onChange={e=>{setProtectPdf(e.target.checked);setError("");if(!e.target.checked){setPassword("");setConfirmPassword("");setShowPassword(false)}}}/>
+                <span aria-hidden="true"></span>
+                <b>{protectPdf?"On":"Off"}</b>
+              </label>
+            </div>
+            {protectPdf&&<div className="password-fields">
+              <label><span>Password</span><input type={showPassword?"text":"password"} value={password} maxLength={32} autoComplete="new-password" placeholder="4-32 characters" onChange={e=>setPassword(e.target.value)}/></label>
+              <label><span>Confirm password</span><input type={showPassword?"text":"password"} value={confirmPassword} maxLength={32} autoComplete="new-password" placeholder="Enter it again" onChange={e=>setConfirmPassword(e.target.value)}/></label>
+              <label className="show-password"><input type="checkbox" checked={showPassword} onChange={e=>setShowPassword(e.target.checked)}/>Show password</label>
+            </div>}
+            <div className="timed-lock-note">
+              <b>About timed unlock</b>
+              <p>A downloaded PDF cannot reliably unlock itself at a future time. That feature needs a separately hosted, time-gated download link, which we can build later.</p>
+            </div>
+          </div>
+        </div>
+        <div className="convert"><div><strong>{items.length} {items.length===1?"page":"pages"}</strong><small>{bytes(items.reduce((n,i)=>n+i.file.size,0))} selected</small></div><button className="primary" disabled={busy} onClick={makePdf}>{busy?"Creating your PDF...":protectPdf?"Create & download locked PDF":"Create & download PDF"}</button></div>
       </div>}
     </section>
     <section className="trust shell"><article><i>01</i><h3>Private by design</h3><p>Your files are processed locally and never uploaded to our servers.</p></article><article><i>02</i><h3>Any image, any order</h3><p>Mix formats, rotate pages, and put everything in the perfect order.</p></article><article><i>03</i><h3>Free without friction</h3><p>No account, no watermark, and no surprise paywall at the final step.</p></article></section>

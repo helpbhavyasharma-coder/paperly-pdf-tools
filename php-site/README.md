@@ -44,3 +44,7 @@ The package exposes route-specific metadata, JSON-LD, `robots.txt`, and `sitemap
 ## Rebuild after frontend changes
 
 Run `npm run php:build`. Upload the rebuilt `php-dist/public_html` files while preserving the server's existing `php-dist/private/config.php`.
+
+## Automatic GitHub deployment
+
+The repository includes `.github/workflows/deploy-hpanel.yml`. A push to `main` builds the PHP package and deploys it over SSH. Configure the repository secrets `HPANEL_HOST`, `HPANEL_PORT`, `HPANEL_USER`, `HPANEL_REMOTE_PATH`, `HPANEL_SSH_PRIVATE_KEY`, and `HPANEL_KNOWN_HOSTS`. The workflow preserves the production `private/config.php` and the server-managed `.well-known` directory.

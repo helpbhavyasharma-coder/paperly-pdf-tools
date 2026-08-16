@@ -1,0 +1,67 @@
+name: Deploy Paperly to hPanel
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: paperly-production
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build PHP package and SEO content
+        run: npm run php:build
+
+      - name: Configure SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.HPANEL_SSH_PRIVATE_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.HPANEL_KNOWN_HOSTS }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/paperly_deploy
+          chmod 600 ~/.ssh/paperly_deploy
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+
+      - name: Prepare remote directories
+        env:
+          HOST: ${{ secrets.HPANEL_HOST }}
+          PORT: ${{ secrets.HPANEL_PORT }}
+          USER: ${{ secrets.HPANEL_USER }}
+          REMOTE_PATH: ${{ secrets.HPANEL_REMOTE_PATH }}
+        run: ssh -i ~/.ssh/paperly_deploy -p "$PORT" "$USER@$HOST" "mkdir -p '$REMOTE_PATH/public_html' '$REMOTE_PATH/private/content'"
+
+      - name: Publish public website
+        env:
+          HOST: ${{ secrets.HPANEL_HOST }}
+          PORT: ${{ secrets.HPANEL_PORT }}
+          USER: ${{ secrets.HPANEL_USER }}
+          REMOTE_PATH: ${{ secrets.HPANEL_REMOTE_PATH }}
+        run: rsync -az --delete --exclude='.well-known/' -e "ssh -i ~/.ssh/paperly_deploy -p $PORT" php-dist/public_html/ "$USER@$HOST:$REMOTE_PATH/public_html/"
+
+      - name: Publish private application files
+        env:
+          HOST: ${{ secrets.HPANEL_HOST }}
+          PORT: ${{ secrets.HPANEL_PORT }}
+          USER: ${{ secrets.HPANEL_USER }}
+          REMOTE_PATH: ${{ secrets.HPANEL_REMOTE_PATH }}
+        run: rsync -az --delete --exclude='config.php' -e "ssh -i ~/.ssh/paperly_deploy -p $PORT" php-dist/private/ "$USER@$HOST:$REMOTE_PATH/private/"

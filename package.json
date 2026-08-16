@@ -13,7 +13,7 @@
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate",
     "php:dev": "vite --config php-site/vite.config.ts",
-    "seo:generate": "node scripts/generate-tool-blogs.mjs",
+    "seo:generate": "node scripts/generate-tool-blogs.mjs && node scripts/generate-ecosystem-blogs.mjs",
     "php:build": "npm run seo:generate && vite build --config php-site/vite.config.ts && node php-site/scripts/prepare-php.mjs"
   },
   "dependencies": {

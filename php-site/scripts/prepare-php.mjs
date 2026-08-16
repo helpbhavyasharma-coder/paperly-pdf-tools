@@ -14,7 +14,9 @@ await mkdir(path.join(output, "private"), { recursive: true });
 await cp(path.join(source, "public_html"), path.join(output, "public_html"), { recursive: true, force: true });
 await cp(path.join(source, "private"), path.join(output, "private"), { recursive: true, force: true });
 await mkdir(path.join(output, "private/content"), { recursive: true });
-await cp(path.join(root, "app/blog/tool-posts.generated.json"), path.join(output, "private/content/tool-posts.json"), { force: true });
+const toolPosts = JSON.parse(await readFile(path.join(root, "app/blog/tool-posts.generated.json"), "utf8"));
+const ecosystemPosts = JSON.parse(await readFile(path.join(root, "app/blog/ecosystem-posts.generated.json"), "utf8"));
+await writeFile(path.join(output, "private/content/tool-posts.json"), `${JSON.stringify([...toolPosts, ...ecosystemPosts], null, 2)}\n`, "utf8");
 
 const readme = await readFile(path.join(root, "php-site/README.md"), "utf8");
 await writeFile(path.join(output, "README.md"), readme, "utf8");

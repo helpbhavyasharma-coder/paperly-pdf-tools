@@ -3,10 +3,6 @@ import { SiteHeader } from "../components/SiteHeader";
 import { SiteFooter } from "../components/SiteFooter";
 import { toolPosts } from "./toolPosts";
 
-export const metadata: Metadata = {
-  title: "PDF Guides and Practical Document Advice | Paperly",
-  description: "Detailed, plain-language guides for converting images, merging, unlocking, compressing and splitting PDF files safely.",
-  alternates: { canonical: "/blog" },
-};
+export const metadata:Metadata={title:"Paperly & Bhauu Blog — PDF Tools, Software and Education",description:"Detailed guides about Paperly PDF tools, Bhauu software company, Bhavya Sharma's portfolio, Bhauu Edu and Quanta Classes.",alternates:{canonical:"/blog"}};
 
-export default function Blog(){return <main><SiteHeader/><header className="page-hero shell"><p className="kicker">— PAPERLY JOURNAL</p><h1>Useful PDF guides,<br/><em>written for real work.</em></h1><p>Detailed, practical guidance for handling everyday documents with care—without jargon, pressure or hidden steps.</p></header><section className="blog-grid shell">{toolPosts.map(post=><a href={`/blog/${post.slug}`} className="blog-card" key={post.slug}><span>{post.tag}</span><h2>{post.title}</h2><p>{post.description}</p><small>{post.wordCount.toLocaleString()} words · {post.readMinutes} min read</small><b>Read complete guide →</b></a>)}</section><SiteFooter/></main>}
+export default function Blog(){return <main><SiteHeader/><header className="page-hero shell"><p className="kicker">— PAPERLY JOURNAL · A BHAUU PROJECT</p><h1>Useful guides for files,<br/><em>building and learning.</em></h1><p>Detailed, practical writing about Paperly PDF tools and the people, products and education ideas across the Bhauu ecosystem.</p></header><section className="blog-grid shell">{toolPosts.map(post=><a href={`/blog/${post.slug}`} className="blog-card" key={post.slug}><img src={post.image} alt={post.imageAlt}/><span>{post.tag}</span><h2>{post.title}</h2><p>{post.description}</p><small>{post.wordCount.toLocaleString()} words · {post.readMinutes} min read</small><b>Read complete guide →</b></a>)}</section><SiteFooter/></main>}

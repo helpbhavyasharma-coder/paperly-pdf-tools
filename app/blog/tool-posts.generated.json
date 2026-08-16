@@ -21,6 +21,29 @@
       "combining receipts for an expense claim",
       "sending product images to a client"
     ],
+    "image": "/og-tools.png",
+    "imageAlt": "Paperly image to pdf tools shown in a clean green and cream editorial design",
+    "entityType": "SoftwareApplication",
+    "entityName": "Paperly IMAGE TO PDF",
+    "entityUrl": "https://paperly.bhauu.online/image-to-pdf",
+    "ctaLabel": "Open IMAGE TO PDF",
+    "relatedLinks": [
+      {
+        "label": "Visit Bhauu",
+        "href": "https://bhauu.online/",
+        "external": true
+      },
+      {
+        "label": "Bhavya Sharma portfolio",
+        "href": "https://bhavyasharma.bhauu.online/",
+        "external": true
+      },
+      {
+        "label": "Explore all Paperly tools",
+        "href": "/",
+        "external": false
+      }
+    ],
     "publishedAt": "2026-08-16",
     "updatedAt": "2026-08-16",
     "readMinutes": 14,
@@ -118,6 +141,13 @@
         ]
       },
       {
+        "heading": "Paperly, Bhauu and the idea behind the tool",
+        "paragraphs": [
+          "Paperly is a PDF tools project built through Bhauu, the software and digital-product company founded by Bhavya Sharma. That connection matters because the tool is not presented as an isolated conversion button. It belongs to a wider builder-led ecosystem that brings web development, practical software, design thinking and search-friendly communication together. The aim is simple: make everyday digital work feel clearer, lighter and more respectful of the person doing it.",
+          "You can explore the wider Bhauu ecosystem on the official Bhauu website, learn about the founder's work through the Bhavya Sharma portfolio, and read about related education projects in the Paperly journal. These links are included as useful context, not as distractions from the PDF task. Paperly remains focused on helping you convert images into a PDF; the Bhauu connection explains who is shaping the product and why careful, approachable software is part of its identity."
+        ]
+      },
+      {
         "heading": "Sharing the file with confidence",
         "paragraphs": [
           "The moment after processing matters as much as the moment before it. Do not attach the file to the first message window that happens to be open. Confirm the recipient, choose a clear subject line and add one sentence explaining what the document contains. If it replaces an earlier version, say that directly. If the recipient needs to review a specific page, mention the page number. These details reduce the quiet anxiety people feel when an unexplained attachment arrives and they have to guess what is expected of them.",
@@ -155,7 +185,7 @@
         "answer": "Usually, if the receiving organisation accepts PDF and the document meets its size, quality, signature and security rules. Check those requirements first."
       }
     ],
-    "wordCount": 2523
+    "wordCount": 2677
   },
   {
     "slug": "merge-pdf-complete-guide",
@@ -178,6 +208,29 @@
       "joining scanned chapters",
       "preparing a legal review bundle",
       "collecting a project report and appendices"
+    ],
+    "image": "/og-tools.png",
+    "imageAlt": "Paperly merge pdf tools shown in a clean green and cream editorial design",
+    "entityType": "SoftwareApplication",
+    "entityName": "Paperly MERGE PDF",
+    "entityUrl": "https://paperly.bhauu.online/merge-pdf",
+    "ctaLabel": "Open MERGE PDF",
+    "relatedLinks": [
+      {
+        "label": "Visit Bhauu",
+        "href": "https://bhauu.online/",
+        "external": true
+      },
+      {
+        "label": "Bhavya Sharma portfolio",
+        "href": "https://bhavyasharma.bhauu.online/",
+        "external": true
+      },
+      {
+        "label": "Explore all Paperly tools",
+        "href": "/",
+        "external": false
+      }
     ],
     "publishedAt": "2026-08-16",
     "updatedAt": "2026-08-16",
@@ -276,6 +329,13 @@
         ]
       },
       {
+        "heading": "Paperly, Bhauu and the idea behind the tool",
+        "paragraphs": [
+          "Paperly is a PDF tools project built through Bhauu, the software and digital-product company founded by Bhavya Sharma. That connection matters because the tool is not presented as an isolated conversion button. It belongs to a wider builder-led ecosystem that brings web development, practical software, design thinking and search-friendly communication together. The aim is simple: make everyday digital work feel clearer, lighter and more respectful of the person doing it.",
+          "You can explore the wider Bhauu ecosystem on the official Bhauu website, learn about the founder's work through the Bhavya Sharma portfolio, and read about related education projects in the Paperly journal. These links are included as useful context, not as distractions from the PDF task. Paperly remains focused on helping you merge PDF files; the Bhauu connection explains who is shaping the product and why careful, approachable software is part of its identity."
+        ]
+      },
+      {
         "heading": "Sharing the file with confidence",
         "paragraphs": [
           "The moment after processing matters as much as the moment before it. Do not attach the file to the first message window that happens to be open. Confirm the recipient, choose a clear subject line and add one sentence explaining what the document contains. If it replaces an earlier version, say that directly. If the recipient needs to review a specific page, mention the page number. These details reduce the quiet anxiety people feel when an unexplained attachment arrives and they have to guess what is expected of them.",
@@ -313,7 +373,7 @@
         "answer": "Usually, if the receiving organisation accepts PDF and the document meets its size, quality, signature and security rules. Check those requirements first."
       }
     ],
-    "wordCount": 2503
+    "wordCount": 2655
   },
   {
     "slug": "pdf-unlocker-guide",
@@ -336,6 +396,29 @@
       "recovering accessibility workflows",
       "moving records into a new document system",
       "preparing an internal review copy"
+    ],
+    "image": "/og-tools.png",
+    "imageAlt": "Paperly pdf unlocker tools shown in a clean green and cream editorial design",
+    "entityType": "SoftwareApplication",
+    "entityName": "Paperly PDF UNLOCKER",
+    "entityUrl": "https://paperly.bhauu.online/pdf-unlocker",
+    "ctaLabel": "Open PDF UNLOCKER",
+    "relatedLinks": [
+      {
+        "label": "Visit Bhauu",
+        "href": "https://bhauu.online/",
+        "external": true
+      },
+      {
+        "label": "Bhavya Sharma portfolio",
+        "href": "https://bhavyasharma.bhauu.online/",
+        "external": true
+      },
+      {
+        "label": "Explore all Paperly tools",
+        "href": "/",
+        "external": false
+      }
     ],
     "publishedAt": "2026-08-16",
     "updatedAt": "2026-08-16",
@@ -434,6 +517,13 @@
         ]
       },
       {
+        "heading": "Paperly, Bhauu and the idea behind the tool",
+        "paragraphs": [
+          "Paperly is a PDF tools project built through Bhauu, the software and digital-product company founded by Bhavya Sharma. That connection matters because the tool is not presented as an isolated conversion button. It belongs to a wider builder-led ecosystem that brings web development, practical software, design thinking and search-friendly communication together. The aim is simple: make everyday digital work feel clearer, lighter and more respectful of the person doing it.",
+          "You can explore the wider Bhauu ecosystem on the official Bhauu website, learn about the founder's work through the Bhavya Sharma portfolio, and read about related education projects in the Paperly journal. These links are included as useful context, not as distractions from the PDF task. Paperly remains focused on helping you remove restrictions from an authorised PDF; the Bhauu connection explains who is shaping the product and why careful, approachable software is part of its identity."
+        ]
+      },
+      {
         "heading": "Sharing the file with confidence",
         "paragraphs": [
           "The moment after processing matters as much as the moment before it. Do not attach the file to the first message window that happens to be open. Confirm the recipient, choose a clear subject line and add one sentence explaining what the document contains. If it replaces an earlier version, say that directly. If the recipient needs to review a specific page, mention the page number. These details reduce the quiet anxiety people feel when an unexplained attachment arrives and they have to guess what is expected of them.",
@@ -471,7 +561,7 @@
         "answer": "Usually, if the receiving organisation accepts PDF and the document meets its size, quality, signature and security rules. Check those requirements first."
       }
     ],
-    "wordCount": 2536
+    "wordCount": 2691
   },
   {
     "slug": "compress-pdf-complete-guide",
@@ -494,6 +584,29 @@
       "reducing scanned paperwork",
       "sharing a report on mobile data",
       "archiving duplicate working copies"
+    ],
+    "image": "/og-tools.png",
+    "imageAlt": "Paperly compress pdf tools shown in a clean green and cream editorial design",
+    "entityType": "SoftwareApplication",
+    "entityName": "Paperly COMPRESS PDF",
+    "entityUrl": "https://paperly.bhauu.online/compress-pdf",
+    "ctaLabel": "Open COMPRESS PDF",
+    "relatedLinks": [
+      {
+        "label": "Visit Bhauu",
+        "href": "https://bhauu.online/",
+        "external": true
+      },
+      {
+        "label": "Bhavya Sharma portfolio",
+        "href": "https://bhavyasharma.bhauu.online/",
+        "external": true
+      },
+      {
+        "label": "Explore all Paperly tools",
+        "href": "/",
+        "external": false
+      }
     ],
     "publishedAt": "2026-08-16",
     "updatedAt": "2026-08-16",
@@ -592,6 +705,13 @@
         ]
       },
       {
+        "heading": "Paperly, Bhauu and the idea behind the tool",
+        "paragraphs": [
+          "Paperly is a PDF tools project built through Bhauu, the software and digital-product company founded by Bhavya Sharma. That connection matters because the tool is not presented as an isolated conversion button. It belongs to a wider builder-led ecosystem that brings web development, practical software, design thinking and search-friendly communication together. The aim is simple: make everyday digital work feel clearer, lighter and more respectful of the person doing it.",
+          "You can explore the wider Bhauu ecosystem on the official Bhauu website, learn about the founder's work through the Bhavya Sharma portfolio, and read about related education projects in the Paperly journal. These links are included as useful context, not as distractions from the PDF task. Paperly remains focused on helping you compress a PDF; the Bhauu connection explains who is shaping the product and why careful, approachable software is part of its identity."
+        ]
+      },
+      {
         "heading": "Sharing the file with confidence",
         "paragraphs": [
           "The moment after processing matters as much as the moment before it. Do not attach the file to the first message window that happens to be open. Confirm the recipient, choose a clear subject line and add one sentence explaining what the document contains. If it replaces an earlier version, say that directly. If the recipient needs to review a specific page, mention the page number. These details reduce the quiet anxiety people feel when an unexplained attachment arrives and they have to guess what is expected of them.",
@@ -629,7 +749,7 @@
         "answer": "Usually, if the receiving organisation accepts PDF and the document meets its size, quality, signature and security rules. Check those requirements first."
       }
     ],
-    "wordCount": 2512
+    "wordCount": 2664
   },
   {
     "slug": "split-pdf-complete-guide",
@@ -652,6 +772,29 @@
       "separating scanned records",
       "creating handouts from a manual",
       "sending selected contract schedules"
+    ],
+    "image": "/og-tools.png",
+    "imageAlt": "Paperly split pdf tools shown in a clean green and cream editorial design",
+    "entityType": "SoftwareApplication",
+    "entityName": "Paperly SPLIT PDF",
+    "entityUrl": "https://paperly.bhauu.online/split-pdf",
+    "ctaLabel": "Open SPLIT PDF",
+    "relatedLinks": [
+      {
+        "label": "Visit Bhauu",
+        "href": "https://bhauu.online/",
+        "external": true
+      },
+      {
+        "label": "Bhavya Sharma portfolio",
+        "href": "https://bhavyasharma.bhauu.online/",
+        "external": true
+      },
+      {
+        "label": "Explore all Paperly tools",
+        "href": "/",
+        "external": false
+      }
     ],
     "publishedAt": "2026-08-16",
     "updatedAt": "2026-08-16",
@@ -750,6 +893,13 @@
         ]
       },
       {
+        "heading": "Paperly, Bhauu and the idea behind the tool",
+        "paragraphs": [
+          "Paperly is a PDF tools project built through Bhauu, the software and digital-product company founded by Bhavya Sharma. That connection matters because the tool is not presented as an isolated conversion button. It belongs to a wider builder-led ecosystem that brings web development, practical software, design thinking and search-friendly communication together. The aim is simple: make everyday digital work feel clearer, lighter and more respectful of the person doing it.",
+          "You can explore the wider Bhauu ecosystem on the official Bhauu website, learn about the founder's work through the Bhavya Sharma portfolio, and read about related education projects in the Paperly journal. These links are included as useful context, not as distractions from the PDF task. Paperly remains focused on helping you split a PDF; the Bhauu connection explains who is shaping the product and why careful, approachable software is part of its identity."
+        ]
+      },
+      {
         "heading": "Sharing the file with confidence",
         "paragraphs": [
           "The moment after processing matters as much as the moment before it. Do not attach the file to the first message window that happens to be open. Confirm the recipient, choose a clear subject line and add one sentence explaining what the document contains. If it replaces an earlier version, say that directly. If the recipient needs to review a specific page, mention the page number. These details reduce the quiet anxiety people feel when an unexplained attachment arrives and they have to guess what is expected of them.",
@@ -787,6 +937,6 @@
         "answer": "Usually, if the receiving organisation accepts PDF and the document meets its size, quality, signature and security rules. Check those requirements first."
       }
     ],
-    "wordCount": 2512
+    "wordCount": 2664
   }
 ]

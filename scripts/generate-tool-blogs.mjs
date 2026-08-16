@@ -164,6 +164,13 @@ const paragraphs = (t) => [
     ],
   },
   {
+    heading: `Paperly, Bhauu and the idea behind the tool`,
+    paragraphs: [
+      `Paperly is a PDF tools project built through Bhauu, the software and digital-product company founded by Bhavya Sharma. That connection matters because the tool is not presented as an isolated conversion button. It belongs to a wider builder-led ecosystem that brings web development, practical software, design thinking and search-friendly communication together. The aim is simple: make everyday digital work feel clearer, lighter and more respectful of the person doing it.`,
+      `You can explore the wider Bhauu ecosystem on the official Bhauu website, learn about the founder's work through the Bhavya Sharma portfolio, and read about related education projects in the Paperly journal. These links are included as useful context, not as distractions from the PDF task. Paperly remains focused on helping you ${t.action}; the Bhauu connection explains who is shaping the product and why careful, approachable software is part of its identity.`,
+    ],
+  },
+  {
     heading: `Sharing the file with confidence`,
     paragraphs: [
       `The moment after processing matters as much as the moment before it. Do not attach the file to the first message window that happens to be open. Confirm the recipient, choose a clear subject line and add one sentence explaining what the document contains. If it replaces an earlier version, say that directly. If the recipient needs to review a specific page, mention the page number. These details reduce the quiet anxiety people feel when an unexplained attachment arrives and they have to guess what is expected of them.`,
@@ -196,6 +203,17 @@ const posts = tools.map((tool) => {
   const sections = paragraphs(tool);
   const post = {
     ...tool,
+    image: "/og-tools.png",
+    imageAlt: `Paperly ${tool.tag.toLowerCase()} tools shown in a clean green and cream editorial design`,
+    entityType: "SoftwareApplication",
+    entityName: `Paperly ${tool.tag}`,
+    entityUrl: `https://paperly.bhauu.online${tool.toolPath}`,
+    ctaLabel: `Open ${tool.tag}`,
+    relatedLinks: [
+      { label: "Visit Bhauu", href: "https://bhauu.online/", external: true },
+      { label: "Bhavya Sharma portfolio", href: "https://bhavyasharma.bhauu.online/", external: true },
+      { label: "Explore all Paperly tools", href: "/", external: false },
+    ],
     publishedAt: "2026-08-16",
     updatedAt: "2026-08-16",
     readMinutes: 14,

@@ -96,6 +96,7 @@ header("Content-Security-Policy: default-src 'self'; script-src 'self' 'nonce-{$
 header('Referrer-Policy: strict-origin-when-cross-origin');
 header('X-Content-Type-Options: nosniff');
 header('X-Frame-Options: DENY');
+header('Cache-Control: no-cache, no-store, must-revalidate');
 
 function e(string $value): string { return htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'); }
 ?>
@@ -121,10 +122,18 @@ function e(string $value): string { return htmlspecialchars($value, ENT_QUOTES |
   <meta name="twitter:description" content="<?= e($description) ?>">
   <meta name="twitter:image" content="<?= e($socialImage) ?>">
   <script type="application/ld+json" nonce="<?= e($nonce) ?>"><?= json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG) ?></script>
-  <link rel="stylesheet" href="/assets/app.css">
+  <link rel="stylesheet" href="/assets/app.css?v=__PAPERLY_BUILD__">
 </head>
 <body>
-  <div id="root"><?php if ($post): ?><article class="seo-prerender"><p><?= e((string)$post['tag']) ?></p><h1><?= e((string)$post['title']) ?></h1><figure><img src="<?= e((string)$post['image']) ?>" alt="<?= e((string)$post['imageAlt']) ?>"></figure><p><?= e((string)$post['intro']) ?></p><?php foreach ($post['sections'] as $section): ?><section><h2><?= e((string)$section['heading']) ?></h2><?php foreach ($section['paragraphs'] as $paragraph): ?><p><?= e((string)$paragraph) ?></p><?php endforeach; ?></section><?php endforeach; ?><aside><h2>Related websites</h2><?php foreach ($post['relatedLinks'] as $link): ?><a href="<?= e((string)$link['href']) ?>"><?= e((string)$link['label']) ?></a> <?php endforeach; ?></aside><section><h2>Frequently asked questions</h2><?php foreach ($post['faq'] as $item): ?><h3><?= e((string)$item['question']) ?></h3><p><?= e((string)$item['answer']) ?></p><?php endforeach; ?></section></article><?php elseif (!$noindex): ?><main class="seo-prerender"><h1><?= e(preg_replace('/\s*[—|]\s*.*$/u', '', $title) ?: $title) ?></h1><p><?= e($description) ?></p></main><?php endif; ?></div>
-  <script type="module" src="/assets/app.js"></script>
+  <div id="root">
+    <?php if ($post): ?>
+      <article class="seo-prerender"><p><?= e((string)$post['tag']) ?></p><h1><?= e((string)$post['title']) ?></h1><figure><img src="<?= e((string)$post['image']) ?>" alt="<?= e((string)$post['imageAlt']) ?>"></figure><p><?= e((string)$post['intro']) ?></p><?php foreach ($post['sections'] as $section): ?><section><h2><?= e((string)$section['heading']) ?></h2><?php foreach ($section['paragraphs'] as $paragraph): ?><p><?= e((string)$paragraph) ?></p><?php endforeach; ?></section><?php endforeach; ?><aside><h2>Related websites</h2><?php foreach ($post['relatedLinks'] as $link): ?><a href="<?= e((string)$link['href']) ?>"><?= e((string)$link['label']) ?></a> <?php endforeach; ?></aside><section><h2>Frequently asked questions</h2><?php foreach ($post['faq'] as $item): ?><h3><?= e((string)$item['question']) ?></h3><p><?= e((string)$item['answer']) ?></p><?php endforeach; ?></section></article>
+    <?php elseif ($path === '/blog'): ?>
+      <main><header class="page-hero shell"><p class="kicker">— PAPERLY JOURNAL · A BHAUU PROJECT</p><h1>Useful guides for files,<br><em>building and learning.</em></h1><p><?= e($description) ?></p></header><section class="blog-grid shell"><?php foreach ($posts as $blogPost): ?><a href="/blog/<?= e((string)$blogPost['slug']) ?>" class="blog-card"><img src="<?= e((string)$blogPost['image']) ?>" alt="<?= e((string)$blogPost['imageAlt']) ?>"><span><?= e((string)$blogPost['tag']) ?></span><h2><?= e((string)$blogPost['title']) ?></h2><p><?= e((string)$blogPost['description']) ?></p><small><?= e((string)$blogPost['wordCount']) ?> words · <?= e((string)$blogPost['readMinutes']) ?> min read</small><b>Read complete guide →</b></a><?php endforeach; ?></section></main>
+    <?php elseif (!$noindex): ?>
+      <main class="seo-prerender"><h1><?= e(preg_replace('/\s*[—|]\s*.*$/u', '', $title) ?: $title) ?></h1><p><?= e($description) ?></p></main>
+    <?php endif; ?>
+  </div>
+  <script type="module" src="/assets/app.js?v=__PAPERLY_BUILD__"></script>
 </body>
 </html>

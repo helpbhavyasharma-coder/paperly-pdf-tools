@@ -1,0 +1,4 @@
+@import "../../app/globals.css";
+
+.php-admin-note{margin-top:16px;color:var(--muted);font-size:11px;line-height:1.5}
+.php-not-found{min-height:60vh;display:grid;place-items:center;text-align:center}.php-not-found h1{margin:0 0 12px;font:500 58px Georgia,serif}.php-not-found p{color:var(--muted)}

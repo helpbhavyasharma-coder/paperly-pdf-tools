@@ -6,14 +6,15 @@
     "node": ">=22.13.0"
   },
   "scripts": {
-    "dev": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext dev",
-    "build": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext build",
-    "start": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext start",
+    "dev": "vinext dev",
+    "build": "vinext build",
+    "start": "vinext start",
     "test": "npm run build && node --test tests/rendered-html.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate",
     "php:dev": "vite --config php-site/vite.config.ts",
-    "php:build": "vite build --config php-site/vite.config.ts && node php-site/scripts/prepare-php.mjs"
+    "seo:generate": "node scripts/generate-tool-blogs.mjs",
+    "php:build": "npm run seo:generate && vite build --config php-site/vite.config.ts && node php-site/scripts/prepare-php.mjs"
   },
   "dependencies": {
     "drizzle-orm": "0.45.2",

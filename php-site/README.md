@@ -33,6 +33,14 @@ If the domain document root cannot be changed, keep `private/` outside `public_h
 
 Point an Apache virtual host document root to `php-dist/public_html`. The sibling folder `php-dist/private` must contain `config.php`.
 
+For a quick local test from PowerShell, run this command from the project folder:
+
+`C:\xampp\php\php.exe -S 127.0.0.1:4180 -t "C:\xampp\htdocs\PDF Converter\php-dist\public_html" "C:\xampp\htdocs\PDF Converter\php-dist\public_html\router.php"`
+
+Then open `http://127.0.0.1:4180/` in the browser. Do not open `php-site/index.html` directly with a `file:///` address; it is Vite source and needs the PHP/web server.
+
+The package exposes route-specific metadata, JSON-LD, `robots.txt`, and `sitemap.xml`. Long-form tool articles are server-rendered in PHP so search crawlers can read their content before JavaScript loads.
+
 ## Rebuild after frontend changes
 
 Run `npm run php:build`. Upload the rebuilt `php-dist/public_html` files while preserving the server's existing `php-dist/private/config.php`.

@@ -1,3 +1,12 @@
-﻿import { SiteHeader } from "../components/SiteHeader";import { SiteFooter } from "../components/SiteFooter";
-const posts=[{href:"/blog/image-to-pdf-guide",tag:"HOW TO",title:"How to turn images into one clean PDF",copy:"Arrange photos, choose the right page settings, and create a share-ready document."},{href:"/blog/heic-to-pdf",tag:"FORMATS",title:"HEIC to PDF without uploading your photos",copy:"A private browser-based workflow for converting iPhone images into a universal PDF."},{href:"/blog/pdf-quality-guide",tag:"QUALITY",title:"Choose the right PDF quality and page size",copy:"Understand A4, Letter, margins, orientation, and compression before you export."}];
-export default function Blog(){return <main><SiteHeader/><header className="page-hero shell"><p className="kicker">— PAPERLY JOURNAL</p><h1>Useful PDF guides,<br/><em>without the jargon.</em></h1><p>Short, practical answers for turning everyday files into documents that are easy to share.</p></header><section className="blog-grid shell">{posts.map(p=><a href={p.href} className="blog-card" key={p.href}><span>{p.tag}</span><h2>{p.title}</h2><p>{p.copy}</p><b>Read guide →</b></a>)}</section><SiteFooter/></main>}
+import type { Metadata } from "next";
+import { SiteHeader } from "../components/SiteHeader";
+import { SiteFooter } from "../components/SiteFooter";
+import { toolPosts } from "./toolPosts";
+
+export const metadata: Metadata = {
+  title: "PDF Guides and Practical Document Advice | Paperly",
+  description: "Detailed, plain-language guides for converting images, merging, unlocking, compressing and splitting PDF files safely.",
+  alternates: { canonical: "/blog" },
+};
+
+export default function Blog(){return <main><SiteHeader/><header className="page-hero shell"><p className="kicker">— PAPERLY JOURNAL</p><h1>Useful PDF guides,<br/><em>written for real work.</em></h1><p>Detailed, practical guidance for handling everyday documents with care—without jargon, pressure or hidden steps.</p></header><section className="blog-grid shell">{toolPosts.map(post=><a href={`/blog/${post.slug}`} className="blog-card" key={post.slug}><span>{post.tag}</span><h2>{post.title}</h2><p>{post.description}</p><small>{post.wordCount.toLocaleString()} words · {post.readMinutes} min read</small><b>Read complete guide →</b></a>)}</section><SiteFooter/></main>}

@@ -11,6 +11,8 @@ import Blog from "@paperly/blog/page";
 import ImageGuide from "@paperly/blog/image-to-pdf-guide/page";
 import HeicGuide from "@paperly/blog/heic-to-pdf/page";
 import QualityGuide from "@paperly/blog/pdf-quality-guide/page";
+import { ToolBlogArticle } from "@paperly/components/ToolBlogArticle";
+import { getToolPost } from "@paperly/blog/toolPosts";
 import Privacy from "@paperly/privacy/page";
 import Terms from "@paperly/terms/page";
 import { SiteHeader } from "@paperly/components/SiteHeader";
@@ -56,7 +58,7 @@ function AdminLogin() {
 }
 
 function AdminDashboard() {
-  const stats=[{label:"Live tools",value:"5"},{label:"Planned tools",value:"0"},{label:"Blog posts",value:"3"},{label:"File storage",value:"None"}];
+  const stats=[{label:"Live tools",value:"5"},{label:"Planned tools",value:"0"},{label:"Blog posts",value:"5"},{label:"File storage",value:"None"}];
   return <main><SiteHeader/><header className="admin-hero shell"><div><p className="kicker">OWNER DASHBOARD</p><h1>Paperly admin</h1><p>PHP session protected controls and the current product roadmap.</p></div><form action="/api/logout.php" method="post"><button className="logout-button">Sign out</button></form></header><section className="admin-stats shell">{stats.map((stat)=><article key={stat.label}><span>{stat.label}</span><strong>{stat.value}</strong></article>)}</section><section className="admin-panels shell"><article><span>TOOLS</span><h2>Live tools</h2><ul><li><b>Image to PDF</b><em>Live</em></li><li><b>Merge PDF</b><em>Live</em></li><li><b>PDF Unlocker</b><em>Live</em></li><li><b>Compress PDF</b><em>Live</em></li><li><b>Split PDF</b><em>Live</em></li></ul><a href="/">Open tools &rarr;</a></article><article><span>CONTENT</span><h2>Published guides</h2><ul><li><b>Image to PDF guide</b><em>Live</em></li><li><b>HEIC to PDF</b><em>Live</em></li><li><b>PDF quality guide</b><em>Live</em></li></ul><a href="/blog">View blog &rarr;</a></article></section><SiteFooter/></main>;
 }
 
@@ -69,9 +71,11 @@ export function App() {
   const admin = path === "/admin";
   const login = path === "/admin/login";
   const route = routes[path];
-  useEffect(() => { document.title = admin ? "Admin | Paperly" : login ? "Admin Login | Paperly" : route?.title || "Page not found | Paperly"; }, [admin, login, route]);
+  const toolPost = path.startsWith("/blog/") ? getToolPost(path.slice(6)) : undefined;
+  useEffect(() => { document.title = admin ? "Admin | Paperly" : login ? "Admin Login | Paperly" : toolPost ? `${toolPost.title} | Paperly` : route?.title || "Page not found | Paperly"; }, [admin, login, route, toolPost]);
   if (admin) return <AdminDashboard/>;
   if (login) return <AdminLogin/>;
+  if (toolPost) return <ToolBlogArticle post={toolPost}/>;
   if (!route) return <NotFound/>;
   const Page = route.component;
   return <Page/>;
